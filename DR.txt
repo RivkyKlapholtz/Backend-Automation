@@ -1,0 +1,62 @@
+                +-------------------------+
+                |     Developer Input     |
+                |-------------------------|
+                |  *.input.json           |
+                |  *.expected.json        |
+                |  service implements     |
+                |  prepareRequest()       |
+                +-----------+-------------+
+                            |
+                            v
+                +-------------------------+
+                |      TestCaseRunner     |
+                |-------------------------|
+                | Load .input + .expected |
+                | → call service.prepare  |
+                | → send request (HttpClient)
+                | → compare result (diff) |
+                | → ignore fields         |
+                | → print cURL (optional) |
+                +-----------+-------------+
+                            |
+                            v
+                +-------------------------+
+                |       HttpClient        |
+                |-------------------------|
+                | uses Axios              |
+                +-------------------------+
+                            |
+                            v
+                +-------------------------+
+                |     Backend Service     |
+                +-------------------------+
+
+                            ↑
+                            |
+                +-------------------------+
+                |  services/*.ts          |
+                |-------------------------|
+                | e.g. UserService        |
+                | prepareRequest(data)    |
+                +-------------------------+
+
+                            ↑
+                            |
+                +-------------------------+
+                |  tests/*.test.ts        |
+                |-------------------------|
+                | Load JSON test cases    |
+                | Describe/it blocks      |
+                +-------------------------+
+
+                            ↑
+                            |
+                +-------------------------+
+                | test-cases/             |
+                |-------------------------|
+                | user/                   |
+                |  ├─ get-user.input.json |
+                |  ├─ get-user.expected   |
+                |  ├─ create-user.input   |
+                |  └─ create-user.expected|
+                +-------------------------+
